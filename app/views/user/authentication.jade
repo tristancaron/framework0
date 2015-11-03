@@ -1,0 +1,182 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/plugins.css')
+      link(rel='stylesheet', href='/css/main.css')
+      link(rel='stylesheet', href='/css/themes.css')
+      script(src='/js/vendor/modernizr-respond.min.js')
+    block js
+      script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
+      script(src='/js/vendor/modernizr-respond.min.js')
+  body
+
+    #login-container.animation-fadeIn
+      .login-title.text-center
+        h1
+          i.gi.gi-flash
+          strong FrameWork
+          br
+          small
+            | Please
+            strong  Login
+            |  or
+            strong  Register
+      .block.push-bit
+
+        form#form-login.form-horizontal.form-bordered.form-control-borderless(action='/user/login', method='post')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-envelope
+                input#login-email.form-control.input-lg(type='text', name='email', placeholder='Email')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-asterisk
+                input#login-password.form-control.input-lg(type='password', name='password', placeholder='Password')
+          if loginError.length !== 0
+            .form-group
+              .col-xs-12
+                .alert.alert-danger.alert-dismissable
+                  button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                  h4
+                    i.fa.fa-times-circle
+                    |  Error
+                  | #{loginError[0]}
+          .form-group.form-actions
+            .col-xs-4
+              label.switch.switch-primary(data-toggle='tooltip', title='Remember Me?')
+                input#login-remember-me(type='checkbox', name='remember-me', checked='')
+                span
+            .col-xs-8.text-right
+              button.btn.btn-sm.btn-primary(type='submit')
+                i.fa.fa-angle-right
+                |  Login to Dashboard
+          .form-group
+            .col-xs-12.text-center
+              a#link-reminder-login(href='javascript:void(0)')
+                small Forgot password?
+              |  -
+              a#link-register-login(href='javascript:void(0)')
+                small  Create a new account
+
+        form#form-reminder.form-horizontal.form-bordered.form-control-borderless.display-none(action='/user/reminder', method='post')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-envelope
+                input#reminder-email.form-control.input-lg(type='text', name='email', placeholder='Email')
+          .form-group.form-actions
+            .col-xs-12.text-right
+              button.btn.btn-sm.btn-primary(type='submit')
+                i.fa.fa-angle-right
+                |  Reset Password
+          if reminderError.length !== 0
+            .form-group
+              .col-xs-12
+                .alert.alert-danger.alert-dismissable
+                  button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                  h4
+                    i.fa.fa-times-circle
+                    |  Error
+                  | #{reminderError[0]}
+          .form-group
+            .col-xs-12.text-center
+              small Did you remember your password?
+              a#link-reminder(href='javascript:void(0)')
+                small  Login
+
+        form#form-register.form-horizontal.form-bordered.form-control-borderless.display-none(action='/user/register', method='post')
+          .form-group
+            .col-xs-6
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-user
+                input#register-firstname.form-control.input-lg(type='text', name='firstname', placeholder='Firstname')
+            .col-xs-6
+              input#register-lastname.form-control.input-lg(type='text', name='lastname', placeholder='Lastname')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-envelope
+                input#register-email.form-control.input-lg(type='text', name='email', placeholder='Email')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-asterisk
+                input#register-password.form-control.input-lg(type='password', name='password', placeholder='Password')
+          .form-group
+            .col-xs-12
+              .input-group
+                span.input-group-addon
+                  i.gi.gi-asterisk
+                input#register-password-verify.form-control.input-lg(type='password', name='password-verify', placeholder='Verify Password')
+          if registerError.length !== 0
+            .form-group
+              .col-xs-12
+                .alert.alert-danger.alert-dismissable
+                  button.close(type='button', data-dismiss='alert', aria-hidden='true') ×
+                  h4
+                    i.fa.fa-times-circle
+                    |  Error
+                  each error in registerError
+                    | #{error}
+          .form-group.form-actions
+            .col-xs-6
+              a.register-terms(href='#modal-terms', data-toggle='modal') Terms
+              label.switch.switch-primary(data-toggle='tooltip', title='Agree to the terms')
+                input#register-terms(type='checkbox', name='terms')
+                span
+            .col-xs-6.text-right
+              button.btn.btn-sm.btn-success(type='submit')
+                i.fa.fa-plus
+                |  Register Account
+          .form-group
+            .col-xs-12.text-center
+              small Do you have an account?
+              a#link-register(href='javascript:void(0)')
+                small  Login
+
+      footer.text-muted.text-center
+        small
+          span#year-copy
+          |  ©
+          a(href='https://goo.gl/K7xqhL', target='_blank') FrameWork
+
+    #modal-terms.modal(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Terms & Conditions
+          .modal-body
+            h4 Title
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            h4 Title
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            h4 Title
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            p
+              | Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+    script(src='/js/vendor/bootstrap.min.js')
+    script(src='/js/plugins.js')
+    script(src='/js/app.js')
+    script(src='/js/pages/login.js')

@@ -1,0 +1,27 @@
+header
+  nav
+    .container
+      a.button-collapse(href='#', data-activates='slide-out')
+        i.mdi-navigation-menu
+      a.page-title= title
+    ul#slide-out.side-nav.fixed
+      li
+        a(href='/') Home
+      li
+        a(href='/user/login') Login
+      li
+        a(href='/user/register') Register
+      li.no-padding
+        ul.collapsible.collapsible-accordion
+          li
+            a.collapsible-header
+            | Admin
+            i.mdi-navigation-arrow-drop-down
+            .collapsible-body
+              ul
+                li
+                  a(href='/admin/user') Users
+                li
+                  a(href='/admin/role') Roles
+                li
+                  a(href='/user/logout') Log-out

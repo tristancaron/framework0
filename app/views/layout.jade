@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/plugins.css')
+      link(rel='stylesheet', href='/css/main.css')
+      link(rel='stylesheet', href='/css/themes.css')
+    block js
+      script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
+      script(src='/js/vendor/modernizr-respond.min.js')
+  body
+
+    #page-wrapper
+      .preloader.themed-background
+        h1.push-top-bottom.text-light.text-center
+          strong Frame
+          | Work
+        .inner
+          h3.text-light.visible-lt-ie9.visible-lt-ie10
+            strong Loading..
+          .preloader-spinner.hidden-lt-ie9.hidden-lt-ie10
+
+      #page-container.sidebar-partial.sidebar-visible-lg.sidebar-no-animations
+
+        #sidebar-alt
+          #sidebar-alt-scroll
+            .sidebar-content
+              a.sidebar-title(href='#')
+                strong Notifications
+              .sidebar-section Nothing...
+
+        #sidebar
+          #sidebar-scroll
+            .sidebar-content
+              a.sidebar-brand(href='#')
+                i.gi.gi-flash
+                span.sidebar-nav-mini-hide
+                  strong Frame
+                  | Work
+
+              .sidebar-section.sidebar-user.clearfix.sidebar-nav-mini-hide
+                .sidebar-user-avatar
+                  a(href='/#')
+                    img(src='/img/placeholders/avatars/avatar.jpg', alt='avatar')
+                .sidebar-user-name #{user.firstname || 'Super'} #{user.lastname || 'Admin'}
+                .sidebar-user-links
+                  a.enable-tooltip(href='javascript:void(0)', data-placement='bottom', title='Settings', onclick="$('#modal-user-settings').modal('show');")
+                    i.gi.gi-cogwheel
+                  a(href='/user/logout', data-toggle='tooltip', data-placement='bottom', title='Logout')
+                    i.gi.gi-exit
+
+              ul.sidebar-nav
+                li
+                  a.active(href='/')
+                    i.gi.gi-stopwatch.sidebar-nav-icon
+                    span.sidebar-nav-mini-hide Dashboard
+                if user.group && user.group.rules && (user.group.rules['groups'] || user.group.rules['users'])
+                  li
+                    a.sidebar-nav-menu(href='#')
+                      i.fa.fa-angle-left.sidebar-nav-indicator.sidebar-nav-mini-hide
+                      i.gi.gi-cogwheel.sidebar-nav-icon
+                      span.sidebar-nav-mini-hide Admin
+                    ul
+                      if user.group.rules['groups'] && user.group.rules['groups']['read']
+                        li
+                          a(href='/admin/group') Group
+                      if user.group.rules['users'] && user.group.rules['users']['read']
+                        li
+                          a(href='/admin/user') User
+
+        #main-container
+          header.navbar.navbar-default
+            ul.nav.navbar-nav-custom
+              li
+                a(href='javascript:void(0)', onclick="App.sidebar('toggle-sidebar');this.blur();")
+                  i.fa.fa-bars.fa-fw
+
+            ul.nav.navbar-nav-custom.pull-right
+              li
+                a(href='javascript:void(0)', onclick="App.sidebar('toggle-sidebar-alt', 'toggle-other');this.blur();")
+                  i.hi.hi-bullhorn
+
+          #page-content
+            block content
+
+          footer.clearfix
+            .pull-right
+              | Crafted with
+              i.fa.fa-heart.text-danger
+              |  by
+              a(href='http://goo.gl/vNS3I', target='_blank') pixelcave
+            .pull-left
+              span#year-copy
+              |  ©
+              a(href='http://goo.gl/TDOSuC', target='_blank') FrameWork
+
+    a#to-top(href='#')
+      i.fa.fa-angle-double-up

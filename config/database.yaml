@@ -1,0 +1,12 @@
+groups:
+  - name: administrator
+    rules:
+      groups:
+        read: true
+        write: true
+      users:
+        read: true
+        write: true
+users:
+  - email: tcaron@student.42.fr
+    group: administrator

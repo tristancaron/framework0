@@ -1,0 +1,39 @@
+#modal-user-settings.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header.text-center
+        h2.modal-title
+          i.fa.fa-pencil
+          |  Settings
+
+      .modal-body
+        form#form-user-settings.form-horizontal.form-bordered(onsubmit='updateUserInfo(event, this, "#{user.id}");')
+          fieldset
+            legend Account Info
+            .form-group
+              label.col-md-4.control-label(for='user-settings-email') Email
+              .col-md-8
+                input#user-settings-email.form-control(type='email', name='email', value='#{user.email}')
+          fieldset
+            legend Password Update
+            .form-group
+              label.col-md-4.control-label(for='user-settings-password') New Password
+              .col-md-8
+                input#user-settings-password.form-control(type='password', name='password', placeholder='Please choose a complex one..')
+            .form-group
+              label.col-md-4.control-label(for='user-settings-repassword') Confirm New Password
+              .col-md-8
+                input#user-settings-repassword.form-control(type='password', name='repassword', placeholder='..and confirm it!')
+          fieldset
+            legend Password to perform operations
+            .form-group
+              label.col-md-4.control-label(for='current-password') Current Password
+              .col-md-8
+                input#current-password.form-control(type='password', name='current-password' placeholder="Your current password here...")
+          .form-group.form-actions
+            .col-xs-12.text-right
+              button.btn.btn-sm.btn-default(type='button', data-dismiss='modal') Close
+              | &nbsp;
+              button.btn.btn-sm.btn-primary(type='submit') Save Changes
+
+script(src='/js/pages/modal.setting.js')

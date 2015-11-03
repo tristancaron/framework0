@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .content-header
+    .header-section
+      h1
+        i.gi.gi-heart
+        | FrameWork
+        br
+        small Welcome
+
+  .block.full
+    .block-title
+      h2 Welcome
+    p This is the first page of FrameWork.
+
+  script(src='/js/vendor/bootstrap.min.js')
+  script(src='/js/plugins.js')
+  script(src='/js/app.js')
+
+  include partial/setting-modal

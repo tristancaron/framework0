@@ -1,0 +1,63 @@
+extends ../layout
+
+block content
+  .content-header
+    .header-section
+      h1
+        i.gi.gi-heart
+        | User
+        br
+        small Management
+
+  ul.breadcrumb.breadcrumb-top
+    li Admin
+    li
+      a(href='#') User
+
+  .row
+
+    .col-md-6
+      .block.full
+        .block-title
+          h2 Groups
+        div.table-responsive
+          table#group-datatable.table.table-vcenter.table-condensed.table-bordered
+            thead
+              tr
+                th
+                th Email
+                th Group name
+
+    .col-md-6
+      .block.full
+        .block-title
+          h2 Create User
+        form.form-horizontal.form-bordered(action='/admin/user/add', method='post', onsubmit='addUser(event, this);')
+          fieldset
+            legend Infos
+            .col-md-10.col-md-offset-1
+              .form-group
+                div#create-user(style="height: 200px").
+                  email:
+                  group:
+                  password:
+          .form-group.form-actions
+            .col-md-9.col-md-offset-3
+              button.btn.btn-sm.btn-primary(type='submit')
+                i.fa.fa-user
+                |  Add
+              | &nbsp;
+              button.btn.btn-sm.btn-warning(type='reset')
+                i.fa.fa-repeat
+                |  Reset
+
+  script(src='/js/vendor/jquery-1.11.3.min.js')
+  script(src='/js/vendor/bootstrap.min.js')
+  script(src='/js/plugins.js')
+  script(src='/js/app.js')
+  script(src='/js/ace/ace.js')
+  script(src='/js/ace/ext-language_tools.js')
+  script(src='/js/helpers/js-yaml.min.js')
+  script(src='/js/pages/admin.user.js')
+
+  include ../partial/setting-modal
